@@ -1,8 +1,5 @@
 node_modules
-.nyc_output
-coverage
 .idea
-*.log
-yarn.lock
-.vscode
-data
+build/
+.gradle/
+*.iml
