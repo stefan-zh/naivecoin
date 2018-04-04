@@ -23,10 +23,10 @@ class BlockTest {
 
         // assertion block headers
         assertEquals(BigInteger.ZERO, block.index);
+        assertEquals("14aa6364081adf2f1b2a603eeff6d1670db4b32d7c1a60a2a4c540511067fb8f75d42bce3a4a145249e06783ac536f20a35034fc73efca293e7cbbdeae3000b7", block.hash);
         assertEquals("0", block.previousHash);
         assertEquals(1465154705, block.timestamp);
         assertEquals(BigInteger.ZERO, block.nonce);
-        assertEquals("14aa6364081adf2f1b2a603eeff6d1670db4b32d7c1a60a2a4c540511067fb8f75d42bce3a4a145249e06783ac536f20a35034fc73efca293e7cbbdeae3000b7", block.hash);
 
         // assert tx's
         assertEquals(1, block.transactions.size());
