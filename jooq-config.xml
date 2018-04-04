@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<configuration>
+  <!-- The logging configuration element specifies the code generation logging threshold. -->
+  <logging>INFO</logging>
+
+  <!-- Configure the database connection here -->
+  <jdbc>
+    <driver>org.sqlite.JDBC</driver>
+    <url>jdbc:sqlite:bc/coin.sqlite3</url>
+  </jdbc>
+
+  <generator>
+    <!-- The default code generator. You can override this one, to generate your own code style
+       Defaults to org.jooq.util.JavaGenerator -->
+    <name>org.jooq.util.JavaGenerator</name>
+
+    <!-- The naming strategy used for class and field names.
+       You may override this with your custom naming strategy. Some examples follow
+       Defaults to org.jooq.util.DefaultGeneratorStrategy -->
+    <strategy>
+      <name>org.jooq.util.DefaultGeneratorStrategy</name>
+    </strategy>
+
+    <database>
+      <!-- The database dialect from jooq-meta. Available dialects are
+           named org.util.[database].[database]Database.
+
+           Natively supported values are:
+
+               org.jooq.util.ase.ASEDatabase
+               org.jooq.util.cubrid.CUBRIDDatabase
+               org.jooq.util.db2.DB2Database
+               org.jooq.util.derby.DerbyDatabase
+               org.jooq.util.firebird.FirebirdDatabase
+               org.jooq.util.h2.H2Database
+               org.jooq.util.hsqldb.HSQLDBDatabase
+               org.jooq.util.informix.InformixDatabase
+               org.jooq.util.ingres.IngresDatabase
+               org.jooq.util.mariadb.MariaDBDatabase
+               org.jooq.util.mysql.MySQLDatabase
+               org.jooq.util.oracle.OracleDatabase
+               org.jooq.util.postgres.PostgresDatabase
+               org.jooq.util.sqlite.SQLiteDatabase
+               org.jooq.util.sqlserver.SQLServerDatabase
+               org.jooq.util.sybase.SybaseDatabase
+
+           This value can be used to reverse-engineer generic JDBC DatabaseMetaData (e.g. for MS Access)
+
+               org.jooq.util.jdbc.JDBCDatabase
+
+           This value can be used to reverse-engineer standard jOOQ-meta XML formats
+
+               org.jooq.util.xml.XMLDatabase
+
+           You can also provide your own org.jooq.util.Database implementation
+           here, if your database is currently not supported -->
+      <name>org.jooq.util.sqlite.SQLiteDatabase</name>
+
+      <!-- All elements that are generated from your schema (A Java regular expression.
+           Use the pipe to separate several expressions) Watch out for
+           case-sensitivity. Depending on your database, this might be
+           important!
+
+           You can create case-insensitive regular expressions using this syntax: (?i:expr)
+
+           Whitespace is ignored and comments are possible.
+           -->
+      <includes>
+        block|
+        tx
+      </includes>
+
+      <!-- Configure type overrides for generated fields, attributes, sequences, parameters. -->
+      <forcedTypes>
+
+      </forcedTypes>
+    </database>
+
+    <generate>
+      <!-- Generation flags: See advanced configuration properties -->
+    </generate>
+
+    <target>
+      <!-- The destination package of your generated classes (within the
+           destination directory)
+
+           jOOQ may append the schema name to this package if generating multiple schemas,
+           e.g. org.jooq.your.packagename.schema1
+                org.jooq.your.packagename.schema2 -->
+      <packageName>com.jivecoin.app.generated</packageName>
+
+      <!-- The destination directory of your generated classes -->
+      <directory>src/main/java</directory>
+
+      <!-- The file encoding to be used with all output files. -->
+      <encoding>UTF-8</encoding>
+    </target>
+  </generator>
+</configuration>

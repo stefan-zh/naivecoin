@@ -1,3 +1,8 @@
+import org.jooq.util.GenerationTool
+
+import java.nio.file.Files
+import java.nio.file.Paths
+
 apply plugin: 'idea'
 apply plugin: 'java'
 
@@ -6,6 +11,18 @@ targetCompatibility = 1.8
 
 repositories {
     mavenCentral()
+}
+
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'org.jooq:jooq-codegen:3.10.6'
+        classpath 'org.xerial:sqlite-jdbc:3.21.0.1'
+    }
 }
 
 dependencies {
@@ -32,4 +49,10 @@ dependencies {
 test {
     // Use JUnit 5
     useJUnitPlatform()
+}
+
+// Generates the jOOQ tables and records classes
+task generateJooq {
+    String xml = new String(Files.readAllBytes(Paths.get("jooq-config.xml")))
+    GenerationTool.generate(xml)
 }
