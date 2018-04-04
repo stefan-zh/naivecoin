@@ -53,6 +53,5 @@ test {
 
 // Generates the jOOQ tables and records classes
 task generateJooq {
-    String xml = new String(Files.readAllBytes(Paths.get("jooq-config.xml")))
-    GenerationTool.generate(xml)
+    GenerationTool.generate(file('jooq-config.xml').text)
 }
