@@ -1,5 +1,6 @@
 {
   "index": 0,
+  "hash": "14aa6364081adf2f1b2a603eeff6d1670db4b32d7c1a60a2a4c540511067fb8f75d42bce3a4a145249e06783ac536f20a35034fc73efca293e7cbbdeae3000b7",
   "previousHash": "0",
   "timestamp": 1465154705,
   "nonce": 0,
@@ -13,6 +14,5 @@
         "outputs": []
       }
     }
-  ],
-  "hash": "14aa6364081adf2f1b2a603eeff6d1670db4b32d7c1a60a2a4c540511067fb8f75d42bce3a4a145249e06783ac536f20a35034fc73efca293e7cbbdeae3000b7"
+  ]
 }

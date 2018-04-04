@@ -19,6 +19,11 @@ public class Block {
 
     @JsonProperty
     @NotBlank
+    @Length(min = 128, max = 128) // 64 bytes
+    public String hash; // hash taken from the contents of the block: sha256 (index + previousHash + timestamp + nonce + transactions)
+
+    @JsonProperty
+    @NotBlank
     @Length(min = 128, max = 128) // 1 byte = 2 hex characters, 64 bytes
     public String previousHash; // hash of previous block, first block is 0
 
@@ -34,10 +39,5 @@ public class Block {
     @NotNull
     @Valid
     public List<Transaction> transactions;
-
-    @JsonProperty
-    @NotBlank
-    @Length(min = 128, max = 128) // 64 bytes
-    public String hash; // hash taken from the contents of the block: sha256 (index + previousHash + timestamp + nonce + transactions)
 
 }
