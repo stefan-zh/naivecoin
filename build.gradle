@@ -1,8 +1,5 @@
 import org.jooq.util.GenerationTool
 
-import java.nio.file.Files
-import java.nio.file.Paths
-
 apply plugin: 'idea'
 apply plugin: 'java'
 
