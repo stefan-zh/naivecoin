@@ -1,8 +1,10 @@
 package com.jivecoin.app;
 
+import com.jivecoin.app.bundle.FlywayBundle;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import org.flywaydb.core.Flyway;
 
 public class JiveCoin extends Application<JiveCoinConfiguration> {
     public static void main(String[] args) throws Exception {
@@ -16,7 +18,9 @@ public class JiveCoin extends Application<JiveCoinConfiguration> {
 
     @Override
     public void initialize(Bootstrap<JiveCoinConfiguration> bootstrap) {
-        // nothing to do yet
+        // add Flyway bundle
+        Flyway flyway = new Flyway();
+        bootstrap.addBundle(new FlywayBundle(flyway));
     }
 
     @Override
