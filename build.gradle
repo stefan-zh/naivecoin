@@ -50,5 +50,7 @@ test {
 
 // Generates the jOOQ tables and records classes
 task generateJooq {
-    GenerationTool.generate(file('jooq-config.xml').text)
+    doLast {
+        GenerationTool.generate(file('jooq-config.xml').text)
+    }
 }
