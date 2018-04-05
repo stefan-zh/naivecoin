@@ -2,14 +2,15 @@ package com.jivecoin.app.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.dropwizard.jackson.Jackson;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.math.BigInteger;
 
 import static io.dropwizard.testing.FixtureHelpers.fixture;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class BlockTest {
 
@@ -18,6 +19,7 @@ class BlockTest {
     private String blockFixture = fixture("fixtures/block.json");
 
     @Test
+    @DisplayName("test block")
     void testBlock() throws IOException {
         Block block = MAPPER.readValue(blockFixture, Block.class);
 

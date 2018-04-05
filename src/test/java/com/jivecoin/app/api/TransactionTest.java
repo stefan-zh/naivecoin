@@ -2,14 +2,15 @@ package com.jivecoin.app.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.dropwizard.jackson.Jackson;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.math.BigDecimal;
 
 import static io.dropwizard.testing.FixtureHelpers.fixture;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class TransactionTest {
 
@@ -18,6 +19,7 @@ class TransactionTest {
     private String txFixture = fixture("fixtures/transaction.json");
 
     @Test
+    @DisplayName("test transaction")
     void testTx() throws IOException {
         Transaction tx = MAPPER.readValue(txFixture, Transaction.class);
 
