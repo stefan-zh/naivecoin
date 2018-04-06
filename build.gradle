@@ -1,14 +1,9 @@
 import org.jooq.util.GenerationTool
+import org.yaml.snakeyaml.Yaml
 
-apply plugin: 'idea'
-apply plugin: 'java'
-
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
-
-repositories {
-    mavenCentral()
-}
+import java.nio.file.Files
+import java.nio.file.Path
+import java.nio.file.Paths
 
 buildscript {
     repositories {
@@ -19,7 +14,21 @@ buildscript {
     dependencies {
         classpath 'org.jooq:jooq-codegen:3.10.6'        // jOOQ code generation package
         classpath 'org.xerial:sqlite-jdbc:3.21.0.1'     // used by generateJooq to connect to DB
+        classpath 'org.yaml:snakeyaml:1.18'             // Yaml parser
     }
+}
+
+plugins {
+    id 'idea'
+    id 'java'
+    id 'org.flywaydb.flyway' version '5.0.7'
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
 }
 
 dependencies {
@@ -61,4 +70,23 @@ task generateJooq {
     doLast {
         GenerationTool.generate(file('jooq-config.xml').text)
     }
+}
+
+// Flyway plugin
+flyway {
+    def config = new Yaml().load(file('jivecoin.yml').text)
+    String configUrl = config.database.url
+
+    // make sure the blockchain store is present
+    String[] parts = configUrl.split(':')
+    if (parts.length < 3) {
+        throw new RuntimeException('Configuration for the database URL is missing hostname')
+    }
+    Path blockchainStore = Paths.get(parts[2])
+    if (Files.notExists(blockchainStore)) {
+        Path dir = blockchainStore.getParent()
+        Files.createDirectories(dir)
+    }
+
+    url = configUrl
 }
