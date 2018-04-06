@@ -1,6 +1,5 @@
 package com.jivecoin.app.bundle;
 
-import com.codahale.metrics.MetricRegistry;
 import com.jivecoin.app.JiveCoinConfiguration;
 import io.dropwizard.ConfiguredBundle;
 import io.dropwizard.db.DataSourceFactory;
@@ -17,7 +16,6 @@ import java.nio.file.Paths;
 public class FlywayBundle implements ConfiguredBundle<JiveCoinConfiguration> {
 
     private final Flyway flyway;
-    MetricRegistry metricRegistry;
 
     public FlywayBundle(Flyway flyway) {
         this.flyway = flyway;
@@ -26,7 +24,7 @@ public class FlywayBundle implements ConfiguredBundle<JiveCoinConfiguration> {
     @Override
     public void run(JiveCoinConfiguration configuration, Environment environment) throws IOException {
         DataSourceFactory dsFactory = configuration.database;
-        DataSource ds = dsFactory.build(metricRegistry, "flyway");
+        DataSource ds = dsFactory.build(environment.metrics(), "flyway");
         // point flyway to the database
         flyway.setDataSource(ds);
 
@@ -39,7 +37,6 @@ public class FlywayBundle implements ConfiguredBundle<JiveCoinConfiguration> {
         if (Files.notExists(blockchainStore)) {
             Path dir = blockchainStore.getParent();
             Files.createDirectories(dir);
-            Files.createFile(blockchainStore);
             // flyway needs to create baseline
             flyway.setBaselineOnMigrate(true);
         }
@@ -49,8 +46,6 @@ public class FlywayBundle implements ConfiguredBundle<JiveCoinConfiguration> {
     }
 
     @Override
-    public void initialize(Bootstrap<?> bootstrap) {
-        this.metricRegistry = bootstrap.getMetricRegistry();
-    }
+    public void initialize(Bootstrap<?> bootstrap) {}
 
 }
